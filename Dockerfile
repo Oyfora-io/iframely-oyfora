@@ -1,25 +1,21 @@
-FROM node:22-alpine
+FROM node:20-alpine
 
 EXPOSE 8061
 
 WORKDIR /iframely
 
-# Create new non-root user
 RUN addgroup --system iframelygroup && adduser --system iframely -G iframelygroup
 RUN apk add --no-cache g++ make python3
 
-# This will change the config to `config.<VALUE>.js` and the express server to change its behaviour.
-# You should overwrite this on the CLI with `-e NODE_ENV=production`.
 ENV NODE_ENV=production
 
-## Utilize docker layer cache
 COPY package.json /iframely/
 RUN npm install --omit=dev
 
 COPY . /iframely
 
-RUN chown -R iframely /iframely && touch /iframely/config.local.js
+RUN chown -R iframely:iframelygroup /iframely && touch /iframely/config.local.js
 
 USER iframely
 
-ENTRYPOINT [ "/iframely/docker/entrypoint.sh" ]
+CMD ["node", "server.js"]
