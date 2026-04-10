@@ -7,7 +7,7 @@ WORKDIR /iframely
 RUN addgroup --system iframelygroup && adduser --system iframely -G iframelygroup
 RUN apk add --no-cache g++ make python3
 
-ENV NODE_ENV=production
+ENV NODE_ENV=local
 
 COPY package.json /iframely/
 RUN npm install --omit=dev
