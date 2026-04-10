@@ -3,7 +3,9 @@ export default {
   CACHE_ENGINE: 'node-cache',
   CORS: {
     origins: [
-      'http://localhost:3004',
+      'http://localhost:3004', // current port
+      'http://localhost:5173', // Vite
+      'http://localhost:3000'  // Next/CRA
       'https://oyfora.io',
     ]
   }
