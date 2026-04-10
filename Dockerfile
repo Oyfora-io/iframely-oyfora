@@ -18,4 +18,4 @@ RUN chown -R iframely:iframelygroup /iframely && touch /iframely/config.local.js
 
 USER iframely
 
-CMD ["node", "server-protected.js"]
+CMD ["node", "server.js"]
